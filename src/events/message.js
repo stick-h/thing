@@ -33,6 +33,7 @@ module.exports = async(mongoose, Guild, client, msg) => {
 			if(cmmd == config.prefix + cmd.name){
 				if(cmd.stick && msg.member.id != "322481819033272320") return;
 				if(cooldown.bool(msg.member.id, cmd.name)) return;
+				if(cmd.categ == "heebs hit?" && msg.guild.id != "813599090113904671") return;
 				
 				if(cmd.config) stuff.push(mongoose);
 				if(cmd.mod) stuff.push(mod);
