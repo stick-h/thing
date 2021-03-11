@@ -1,6 +1,6 @@
 module.exports = {
-	name: "cage",
-	desc: "create channel in Cum City",
+	name: "c",
+	desc: "c",
 	categ: "heebs hit?",
 	run: async(Discord, client, msg, args) => {
 		if(msg.member.id != "219541416760705024") return;
