@@ -17,7 +17,7 @@ module.exports = {
 				if(isNaN(page) || page < 1 || page > Math.ceil(config.commands.length/5)) return msg.channel.send("invalid page number");
 				embed.setFooter(`${page}/${Math.ceil(config.commands.length/5)}`);
 				
-				for(i = (page-1)*5; i < config.triggers.length && i < page*5; i++) embed.addField(i + " " + config.prefix + config.commands[i].name, config.commands[i].file);
+				for(i = (page-1)*5; i < config.commands.length && i < page*5; i++) embed.addField(i + " " + config.prefix + config.commands[i].name, config.commands[i].file);
 			}
 			return msg.channel.send(embed);
 		}
