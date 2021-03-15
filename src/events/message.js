@@ -40,6 +40,7 @@ module.exports = async(mongoose, Guild, client, msg) => {
 				cmd.run(...stuff);
 				
 				if(cmd.cooldown) cooldown.count(msg.member.id, cmd.name, 5, 1000);
+				else cooldown.count(msg.member.id, cmd.name, 5, 100);
 			}
 		});
 	}).catch(console.error);

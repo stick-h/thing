@@ -1,21 +1,27 @@
 module.exports = {
 	name: "trigger",
 	args: [
-		"`list`\nlists all triggers and their indexes for this server",
+		"`list [page]`\nlists all triggers and their indexes for this server",
 		"`add <trigger>`\nadds new trigger", 
 		"`rem <index>`\nremoves trigger",
 		"`<index> <text | file | reaction> <message | file link | emoji | null>`\nassigns a response to a trigger",
 	],
 	desc: "creates a bot response to the provided trigger",
-	categ: "Server",
+	categ: "Custom",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
 		if(args[0] == "list"){
 			const embed = new Discord.MessageEmbed().setTitle("Triggers").setColor("#7289da");
-			if(!config.triggers) embed.setDescription("No Triggers For This Server");
-			else for(i = 0; i < config.triggers.length; i++){
-				const trigger = config.triggers[i];
-				embed.addField(`${i} - ${trigger.name}`, `\`text\` - ${trigger.text}\n\`file\` - ${trigger.file}\n\`reaction\` - ${trigger.reaction}`);
+			if(config.triggers.length == 0) embed.setDescription("No Triggers For This Server");
+			else{
+				const page  = args[1] ? args[1] : 1;
+				if(isNaN(page) || page < 1 || page > Math.ceil(config.triggers.length/5)) return msg.channel.send("invalid page number");
+				embed.setFooter(`${page}/${Math.ceil(config.triggers.length/5)}`);
+				
+				for(i = (page-1)*5; i < config.triggers.length && i < page*5; i++){
+					const trigger = config.triggers[i];
+					embed.addField(`${i} - ${trigger.name}`, `\`text\` - ${trigger.text}\n\`file\` - ${trigger.file}\n\`reaction\` - ${trigger.reaction}`);
+				}
 			}
 			return msg.channel.send(embed);
 		}
@@ -34,15 +40,13 @@ module.exports = {
 		}
 		
 		if(args[0] == "rem"){
-			const index = args[1]*1;
-			const name = config.triggers[index].name;
-			if(isNaN(index) || !config.triggers[index]) return msg.channel.send("invalid index");
-			await config.updateOne({$pull: {"triggers": config.triggers[index]}});
+			if(isNaN(args[1]) || !config.triggers[args[1]]) return msg.channel.send("invalid index");
+			const name = config.triggers[args[1]].name;
+			await config.updateOne({$pull: {"triggers": config.triggers[args[1]]}});
 			return msg.channel.send(`trigger ${name} removed`);
 		}
 		
-		const index = args[0]*1;
-		if(isNaN(index) || !config.triggers[index]) return msg.channel.send("invalid index");
+		if(isNaN(args[1]) || !config.triggers[args[1]]) return msg.channel.send("invalid index");
 		if(args[1] != "text" && args[1] != "file" && args[1] != "reaction") return msg.channel.send("invalid arguments");
 		
 		var response = msg.content.split(" ").slice(3).join(" ");
@@ -50,9 +54,9 @@ module.exports = {
 			response = null;
 			args[2] = null;
 		}
-		if(args[1] == "text") await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[index]}]});
-		if(args[1] == "file") await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[index]}]});
-		if(args[1] == "reaction") await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[index]}]});
+		if(args[1] == "text") await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[1]]}]});
+		if(args[1] == "file") await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[args[1]]}]});
+		if(args[1] == "reaction") await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[1]]}]});
 		
 		return msg.channel.send("trigger updated");
 	}
