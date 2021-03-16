@@ -54,9 +54,9 @@ module.exports = {
 			response = null;
 			args[2] = null;
 		}
-		if(args[1] == "text") await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[1]]}]});
-		if(args[1] == "file") await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[args[1]]}]});
-		if(args[1] == "reaction") await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[1]]}]});
+		if(args[1] == "text") await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+		if(args[1] == "file") await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+		if(args[1] == "reaction") await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
 		
 		return msg.channel.send("trigger updated");
 	}
