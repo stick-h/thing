@@ -29,7 +29,7 @@ module.exports = {
 					}
 				});
 				filtered = filtered.filter(message => arr.includes(message));
-				msg.channel.bulkDelete(filtered).then(() => msg.channel.send(`${num} messages deleted`)).catch(err => msg.channel.send(`an error has occured\n\`${err}\``));
+				msg.channel.bulkDelete(filtered).then(() => msg.channel.send(`${num} messages deleted`).then(dmsg => setTimeout(() => dmsg.delete(), 3000))).catch(err => msg.channel.send(`an error has occured\n\`${err}\``));
             });
 		}
 	}
