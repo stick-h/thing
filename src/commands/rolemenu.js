@@ -1,16 +1,16 @@
 module.exports = {
 	name: "rolemenu",
-	args: [
-		"`list`\nlists all rolemenus in the server", 
-		"`<message id> <create | delete>`\ncreates or deletes a rolemenu on a message",
-		"`<message id> <add | rem> <role>`\nadds or removes role from rolemenu",
-		"`<message id> toggle`\ntoggles if the rolemenu toggles"
-	],
+	args: {
+		"list" : "lists all rolemenus in the server", 
+		"<message id> <create | delete>" : "creates or deletes a rolemenu on a message",
+		"<message id> <add | rem> <role>" : "adds or removes role from rolemenu",
+		"<message id> toggle" : "toggles if the rolemenu toggles"
+	},
 	categ: "Server",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
 		if(!args[0]) return msg.channel.send("missing arguments");
-		var emoji;
+		let emoji;
 		
 		if(args[0] == "list"){
 			const embed = new Discord.MessageEmbed().setTitle(`${msg.guild.name} Rolemenus`);

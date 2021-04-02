@@ -1,6 +1,9 @@
 module.exports = {
 	name: "mod",
-	args: ["`list`\nlists all mod roles for this server", "`<add | rem> <role>`\ngives or takes a role's mod perms"],
+	args: {
+		"list" : "lists all mod roles for this server", 
+		"<add | rem> <role>" : "gives or takes a role's mod perms"
+	},
 	categ: "Server",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {

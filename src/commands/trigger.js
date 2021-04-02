@@ -1,12 +1,11 @@
 module.exports = {
 	name: "trigger",
-	args: [
-		"`list [page]`\nlists all triggers and their indexes for this server",
-		"`add <trigger>`\nadds new trigger", 
-		"`rem <index>`\nremoves trigger",
-		"`<index> <text | file | reaction> <message | file link | emoji | null>`\nassigns a response to a trigger",
-	],
-	desc: "creates a bot response to the provided trigger",
+	args: {
+		"list [page]" : "lists all triggers and their indexes for this server",
+		"add <trigger>" : "adds new trigger", 
+		"rem <index>" : "removes trigger",
+		"<index> <text | file | reaction> <message | file link | emoji | null>" : "assigns a response to a trigger",
+	},
 	categ: "Custom",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
@@ -46,17 +45,20 @@ module.exports = {
 			return msg.channel.send(`trigger ${name} removed`);
 		}
 		
-		if(isNaN(args[0]) || !config.triggers[args[0]]) return msg.channel.send("invalid index");
+		if(isNaN(args[1]) || !config.triggers[args[1]]) return msg.channel.send("invalid index");
 		if(args[1] != "text" && args[1] != "file" && args[1] != "reaction") return msg.channel.send("invalid arguments");
 		
-		var response = msg.content.split(" ").slice(3).join(" ");
+		let response = msg.content.split(" ").slice(3).join(" ");
 		if(args[2] == "null"){
 			response = null;
 			args[2] = null;
 		}
-		if(args[1] == "text") await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
-		if(args[1] == "file") await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
-		if(args[1] == "reaction") await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+		
+		switch(args[1]){
+			case "text": await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[1]]}]}); break;
+			case "file": await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[args[1]]}]}); break;
+			case "reaction": await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[1]]}]}); break;
+		}
 		
 		return msg.channel.send("trigger updated");
 	}

@@ -12,16 +12,14 @@ module.exports = {
 		const arr = [];
 		const permsD = [];
 		
-		for(i = 0; i < bits.length; i++){
-			for(const key in Discord.Permissions.FLAGS) if(Discord.Permissions.FLAGS[key] == bits[i] << i) permsD.push(key.toString());
-		}
+		for(i = 0; i < bits.length; i++) for(const key in Discord.Permissions.FLAGS) if(Discord.Permissions.FLAGS[key] == bits[i] << i) permsD.push(key.toString());
 		
 		if(role.permissions.has("ADMINISTRATOR")) arr.push("ADMINISTRATOR");
 		else for(const key in Discord.Permissions.FLAGS){
 			if(role.permissions.has(key.toString()) && !permsD.find(perm => perm == key.toString())) arr.push(key.toString());
 		}
 		
-		var perms = arr.join(" • ").split("_").join(" ").toLowerCase();
+		let perms = arr.join(" • ").split("_").join(" ").toLowerCase();
 		if(arr.length == 0) perms = "None";
 		
 		const desc = [];
@@ -29,7 +27,7 @@ module.exports = {
 		if(role.mentionable) desc.push("Mentionable");
 		
 		const pos = msg.guild.roles.cache.size - role.position;
-		var color = role.hexColor;
+		let color = role.hexColor;
 		if(color == "#000000") color = "None";
 		
 		const embed = new Discord.MessageEmbed().setTitle(role.name).setDescription(desc.join("\n"))

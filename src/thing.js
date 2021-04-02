@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const fs = require("fs");
+const files = fs.readdirSync(`${__dirname}/events`).filter(file => file.endsWith(".js"));
 
 const mongoose = require("mongoose");
 const Guild = require("./util/guild.js");
@@ -27,7 +28,6 @@ client.once("ready", async() => {
 	});
 });
 
-const files = fs.readdirSync(`${__dirname}/events`).filter(file => file.endsWith(".js"));
 files.forEach(file => {
 	const event = require(`${__dirname}/events/${file}`);
 	client.on(file.split(".")[0], event.bind(null, mongoose, Guild, client));

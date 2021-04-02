@@ -1,11 +1,10 @@
 module.exports = {
 	name: "command",
-	args: [
-		"`list`\nlists all custom commands and their indexes for this server",
-		"`add <command> <file link>`\nadds new command", 
-		"`rem <index>`\nremoves command",
-	],
-	desc: "creates a custom image command",
+	args: {
+		"list" : "lists all custom commands and their indexes for this server",
+		"add <command> <file link>" : "adds new command", 
+		"rem <index>" : "removes command",
+	},
 	categ: "Custom",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
