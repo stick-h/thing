@@ -27,7 +27,7 @@ module.exports = {
 		}
 		
 		msg.content = msg.content.toLowerCase();
-		let msgA = msg.content;
+		var msgA = msg.content;
 		const symb = " `~!@#$%^&*()_+-=[]\;',./{}|:\"<>?​\n".split("");
 		symb.forEach(sym => {msgA = msgA.split(sym).join(" ")});
 		
