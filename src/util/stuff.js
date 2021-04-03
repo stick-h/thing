@@ -27,15 +27,16 @@ module.exports = {
 		}
 		
 		msg.content = msg.content.toLowerCase();
-		var msgA = msg.content;
+		let msgA = msg.content;
 		const symb = " `~!@#$%^&*()_+-=[]\;',./{}|:\"<>?​\n".split("");
 		symb.forEach(sym => {msgA = msgA.split(sym).join(" ")});
+		msgA = msgA.split(" ");
 		
 		for(const cat in cats) detect(cat, cats[cat]);
 		if(config.triggers) config.triggers.forEach(obj => detect(obj.name, obj));
 		
 		if(config.commands) config.commands.forEach(obj => {
-			if(msg.content.startsWith(config.prefix + obj.name) && !cooldown.bool(msg.member.id, "custom")){
+			if(msg.content.split(" ")[0] == config.prefix + obj.name && !cooldown.bool(msg.member.id, "custom")){
 				msg.channel.send({files: [obj.file]});
 				cooldown.count(msg.member.id, "custom", 5, 1000);
 			}
