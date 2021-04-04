@@ -55,9 +55,9 @@ module.exports = {
 		}
 		
 		switch(args[1]){
-			case "text": await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[1]]}]}); break;
-			case "file": await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[args[1]]}]}); break;
-			case "reaction": await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[1]]}]}); break;
+			case "text": await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
+			case "file": await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
+			case "reaction": await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
 		}
 		
 		return msg.channel.send("trigger updated");
