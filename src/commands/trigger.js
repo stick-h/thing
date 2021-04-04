@@ -45,7 +45,7 @@ module.exports = {
 			return msg.channel.send(`trigger ${name} removed`);
 		}
 		
-		if(isNaN(args[1]) || !config.triggers[args[1]]) return msg.channel.send("invalid index");
+		if(isNaN(args[0]) || !config.triggers[args[0]]) return msg.channel.send("invalid index");
 		if(args[1] != "text" && args[1] != "file" && args[1] != "reaction") return msg.channel.send("invalid arguments");
 		
 		let response = msg.content.split(" ").slice(3).join(" ");
