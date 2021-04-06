@@ -13,7 +13,7 @@ module.exports = {
 		if(!msg.channel.permissionsFor(self).has("READ_MESSAGE_HISTORY")) return msg.channel.send("missing permission: read message history");
 		
 		if(!msg.mentions.users.first()){
-			if(args[0] >= 1 && args[0] =< 100) await msg.delete(); 
+			if(args[0] >= 1 && args[0] <= 100) await msg.delete(); 
 			msg.channel.bulkDelete(args[0]).then(msgs => {
 				msg.channel.send(`${msgs.size} messages deleted`).then(dmsg => setTimeout(() => dmsg.delete(), 3000));
 			}).catch(err => msg.channel.send(`an error has occured\n\`${err}\``));
