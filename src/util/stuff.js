@@ -7,7 +7,6 @@ module.exports = {
 		function detect(str, obj){
 			let strA = str.split(" ");
 			let found = 0;
-			let index = 0;
 			
 			for(i = 0; i < msgA.length; i++){
 				for(j = 0; j < strA.length; j++) if(msgA[i + j] == strA[j]) found++;
