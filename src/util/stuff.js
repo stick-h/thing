@@ -40,15 +40,5 @@ module.exports = {
 				cooldown.count(msg.member.id, "custom", 5, 1000);
 			}
 		});
-		
-		const banned = [];
-		banned.forEach(term => {
-			for(i = 0; i < msgA.length; i++){
-				if(msgA[i] == term || msg[i].includes(term)) msg.delete();
-				let combined = [];
-				for(j = 0; j < term.length; j++) combined.push(msgA[i+j]);
-				if(combined.join("") == term) msg.delete();
-			}
-		});
 	}
 }
