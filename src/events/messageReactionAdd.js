@@ -24,7 +24,7 @@ module.exports = async(mongoose, Guild, client, reaction, user) => {
 		
 		if(!last[rmenu.id]) last[rmenu.id] = {};
 		const lastE = last[rmenu.id];
-		if(rmenu.toggle && lastE[user.id] != emoji && lastE[user.id]) reaction.message.reactions.cache.get(userR.emoji).users.remove(user.id);
+		if(rmenu.toggle && lastE[user.id] != emoji && lastE[user.id]) reaction.message.reactions.cache.get(lastE[user.id]).users.remove(user.id);
 		last[rmenu.id][user.id] = emoji;
 		
 		guild.members.fetch(user.id).then(async member => member.roles.add(obj.role));
