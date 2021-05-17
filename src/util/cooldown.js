@@ -8,7 +8,6 @@ module.exports = {
 		if(!cooldown[userID]) cooldown[userID] = {};
 		if(!cooldown[userID][counter]) cooldown[userID][counter] = 3;
 		cooldown[userID][counter] -= 1;
-		console.log(cooldown[userID][counter]);
 		
 		const countdown = setInterval(function(){
 			cooldown[userID][counter] = 3;
