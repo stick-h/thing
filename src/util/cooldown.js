@@ -2,15 +2,16 @@ const cooldown = require("./cooldown.json");
 
 module.exports = {
 	bool: (userID, counter) => {
-		if(cooldown[userID]) if(cooldown[userID][counter] > 0) return true;
+		if(cooldown[userID]) if(cooldown[userID][counter] == 0) return true;
 	},
-	count: (userID, counter, units, interval) => {
+	count: (userID, counter) => {
 		if(!cooldown[userID]) cooldown[userID] = {};
-		cooldown[userID][counter] = units;
+		if(!cooldown[userID][counter]) cooldown[userID][counter] = 3;
+		cooldown[userID][counter] -= 1;
+		console.log(cooldown[userID][counter]);
 		
 		const countdown = setInterval(function(){
-			cooldown[userID][counter] -= 1;
-			if(cooldown[userID][counter] == 0) clearInterval(countdown);
-		}, interval);
+			cooldown[userID][counter] = 3;
+		}, 6000);
 	}
 }

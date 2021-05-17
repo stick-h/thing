@@ -35,8 +35,7 @@ module.exports = async(mongoose, Guild, client, msg) => {
 				if(cmd.categ == "heebs hit?" && msg.guild.id != "813599090113904671") return;
 				
 				cmd.run(...things);
-				let time = cmd.cooldown ? 1000 : 100;
-				cooldown.count(msg.member.id, cmd.name, 5, time);
+				cooldown.count(msg.member.id, "command");
 			}
 		});
 	}).catch(console.error);

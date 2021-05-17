@@ -19,7 +19,7 @@ module.exports = async(mongoose, Guild, client, reaction, user) => {
 		if(cooldown.bool(user.id, "react")){
 			if(cooldown.bool(user.id, "reactDM")) return;
 			user.createDM().then(dmChannel => dmChannel.send("you are attempting to change roles too fast"));
-			return cooldown.count(user.id, "reactDM", 2, 1000);
+			return cooldown.count(user.id, "reactDM");
 		}
 		
 		if(!last[rmenu.id]) last[rmenu.id] = {};
@@ -28,6 +28,6 @@ module.exports = async(mongoose, Guild, client, reaction, user) => {
 		last[rmenu.id][user.id] = emoji;
 		
 		guild.members.fetch(user.id).then(async member => member.roles.add(obj.role));
-		cooldown.count(user.id, "react", 1, 1000);
+		cooldown.count(user.id, "react");
 	}).catch(console.error);
 }

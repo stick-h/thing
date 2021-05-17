@@ -20,7 +20,7 @@ module.exports = {
 					if(cooldown.bool(msg.member.id, "cat")) return;
 					if(!obj.file) msg.channel.send(obj.text);
 					else msg.channel.send(obj.text, {files: [obj.file]});
-					cooldown.count(msg.member.id, "cat", 5, 1000);
+					cooldown.count(msg.member.id, "cat");
 				}
 			}
 		}
@@ -35,9 +35,9 @@ module.exports = {
 		if(config.triggers) config.triggers.forEach(obj => detect(obj.name, obj));
 		
 		if(config.commands) config.commands.forEach(obj => {
-			if(msg.content.split(" ")[0] == config.prefix + obj.name && !cooldown.bool(msg.member.id, "custom")){
+			if(msg.content.split(" ")[0] == config.prefix + obj.name && !cooldown.bool(msg.member.id, "cat")){
 				msg.channel.send({files: [obj.file]});
-				cooldown.count(msg.member.id, "custom", 5, 1000);
+				cooldown.count(msg.member.id, "cat");
 			}
 		});
 	}

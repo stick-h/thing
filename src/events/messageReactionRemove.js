@@ -17,10 +17,10 @@ module.exports = async(mongoose, Guild, client, reaction, user) => {
 		if(cooldown.bool(user.id, "react")){
 			if(cooldown.bool(user.id, "reactDM")) return;
 			user.createDM().then(dmChannel => dmChannel.send("you are attempting to change roles too fast"));
-			return cooldown.count(user.id, "reactDM", 3, 1000);
+			return cooldown.count(user.id, "reactDM");
 		}
 		
 		guild.members.fetch(user.id).then(async member => member.roles.remove(obj.role));
-		cooldown.count(user.id, "react", 1, 1000);
+		cooldown.count(user.id, "react");
 	}).catch(console.error);
 }
