@@ -23,7 +23,8 @@ module.exports = {
 					else emoji = `<:${gEmoji.name}:${gEmoji.id}>`;
 					arr.push(`${emoji} <@&${obj.role}>`);
 				});
-				embed.addField(rmenu.id, arr.join("\n"));
+				const str = arr.join("\n") ? arr.join("\n") : "\n";
+				embed.addField(rmenu.id, str);
 			});
 			return msg.channel.send(embed);
 		}
