@@ -11,6 +11,7 @@ module.exports = {
 		
 		const countdown = setInterval(function(){
 			cooldown[userID][counter] = 3;
+			if(cooldown[userID][counter] == 3) clearInterval(countdown);
 		}, 6000);
 	}
 }
