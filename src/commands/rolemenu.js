@@ -72,7 +72,7 @@ module.exports = {
 						await config.updateOne({$push: {"rolemenus.$[rolmenu].objs": {role: role.id, reaction: emoji}}}, {arrayFilters: [{rolmenu: rmenu}]});
 						rmsg.react(emoji);
 						return msg.channel.send("role added");
-					}).catch(err => {console.log(err)});
+					}).catch(err => {msg.channel.send("no reaction given in time")});
 				});
 			}
 			
