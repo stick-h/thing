@@ -11,6 +11,12 @@
 		"reaction": null,
 		"desc": "buff cat"
 	},
+	"boy": {
+		"text": null,
+		"file": "https://cdn.discordapp.com/attachments/739978682533150810/929489348775272478/Untitled_Artwork.png",
+		"reaction": null,
+		"desc": "buff cat 2"
+	},
 	"rawr": {
 		"text": null,
 		"file": "https://cdn.discordapp.com/attachments/739978682533150810/845037169739694121/Untitled_Artwork.png",
