@@ -31,7 +31,7 @@ module.exports = {
 		
 		if(!msg.member.hasPermission("MANAGE_GUILD")) return msg.channel.send("manage guild permission required to use this command");
 		
-		const rmenu = config.rolemenus.find(rolemenu => rolemenu.id == args[0]);
+		const rmenu = await config.rolemenus.find(rolemenu => rolemenu.id == args[0]);
 		if(args[1] == "create"){
 			if(rmenu) return msg.channel.send("rolemenu already exists");
 			await config.updateOne({$push: {"rolemenus": {id: args[0], toggle: false, objs: []}}});
