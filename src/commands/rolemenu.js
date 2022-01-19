@@ -81,6 +81,6 @@ module.exports = {
 				await config.updateOne({$pull: {"rolemenus.$[rolmenu].objs": obj}}, {arrayFilters: [{rolmenu: rmenu}]});
 				return msg.channel.send("role removed");
 			}
-		});
+		}).catch(err -> msg.channel.send(err));
 	}
 }
