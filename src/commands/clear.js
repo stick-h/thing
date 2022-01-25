@@ -1,8 +1,7 @@
 module.exports = {
 	name: "clear",
 	args: "<num> [user]",
-	desc: "clears messages",
-	categ: "Mod",
+	categ: "mod",
 	mod: true,
 	run: async(Discord, client, msg, args, config, mod) => {
 		if(isNaN(args[0])) return msg.channel.send("invalid arguments");
