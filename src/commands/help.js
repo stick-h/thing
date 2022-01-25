@@ -31,7 +31,7 @@ module.exports = {
 			const content = [];
 			
 			let str = config.prefix + cmd.name;
-			if(cmd.args instanceof String) str += " " + cmd.args;
+			if(typeof cmd.args === "string") str += " " + cmd.args;
 			content.push("`" + str + "`");
 			if(cmd.args instanceof Array) for(i = 0; i < cmd.args.length; i++) content.push("- `" + cmd.args[i] + "`");
 			categs[cmd.categ].push(content.join("\n"));
