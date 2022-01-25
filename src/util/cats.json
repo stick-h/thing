@@ -3,25 +3,25 @@
 		"text": null,
 		"file": "https://cdn.discordapp.com/attachments/739978682533150810/745683526065717258/nya.png",
 		"reaction": null,
-		"desc": "six titty kitty"
+		"help": true
 	},
 	"buff": {
 		"text": null,
 		"file": "https://cdn.discordapp.com/attachments/739978682533150810/756198491205927042/Untitled_Artwork-2.png",
 		"reaction": null,
-		"desc": "buff cat"
+		"help": true
 	},
 	"boy": {
 		"text": null,
 		"file": "https://cdn.discordapp.com/attachments/739978682533150810/929489348775272478/Untitled_Artwork.png",
 		"reaction": null,
-		"desc": "buff cat 2"
+		"help": true
 	},
 	"rawr": {
 		"text": null,
 		"file": "https://cdn.discordapp.com/attachments/739978682533150810/845037169739694121/Untitled_Artwork.png",
 		"reaction": null,
-		"desc": "scene cat"
+		"help": true
 	},
 	"fax": {
 		"text": null,
