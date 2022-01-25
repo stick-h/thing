@@ -9,7 +9,6 @@ module.exports = {
 	categ: "Custom",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
-		console.log("2 " + msg.content);
 		if(args[0] == "list"){
 			const embed = new Discord.MessageEmbed().setTitle("Triggers").setColor("#7289da");
 			if(config.triggers.length == 0) embed.setDescription("No Triggers For This Server");
