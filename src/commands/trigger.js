@@ -49,7 +49,6 @@ module.exports = {
 		if(args[1] != "text" && args[1] != "file" && args[1] != "reaction") return msg.channel.send("invalid arguments");
 		
 		let response = msg.content.split(" ").slice(3).join(" ");
-		console.log(msg.content + "\n" + response);
 		if(args[2] == "null") response = null;
 		let file;
 		if(args[1] == "file"){
