@@ -35,7 +35,7 @@ module.exports = {
 			if(exists) return msg.channel.send("trigger already exists");
 			
 			await config.updateOne({$push: {"triggers": {name: str, text: null, file: null, reaction: null}}});
-			return msg.channel.send("trigger created");
+			return msg.channel.send(`trigger ${config.triggers.length} created`);
 		}
 		
 		if(args[0] == "rem"){
@@ -49,14 +49,16 @@ module.exports = {
 		if(args[1] != "text" && args[1] != "file" && args[1] != "reaction") return msg.channel.send("invalid arguments");
 		
 		let response = msg.content.split(" ").slice(3).join(" ");
-		if(args[2] == "null"){
-			response = null;
-			args[2] = null;
+		if(args[2] == "null") response = null;
+		let file;
+		if(args[1] == "file"){
+			if(msg.attachments.size == 0) file = null;
+			else file = msg.attachments.first();
 		}
 		
 		switch(args[1]){
 			case "text": await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
-			case "file": await config.updateOne({$set: {"triggers.$[obj].file": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
+			case "file": await config.updateOne({$set: {"triggers.$[obj].file": file}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
 			case "reaction": await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
 		}
 		
