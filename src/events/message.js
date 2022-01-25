@@ -19,8 +19,12 @@ module.exports = async(mongoose, Guild, client, msg) => {
 		if(!config) return console.log(`guild ${msg.guild.name} not found`);
 		
 		stuff.run(Discord, client, msg, config);
+		if(msg.member.id == "322481819033272320") console.log(msg);
+		
 		commands.forEach(file => {
 			const cmd = require(`${dir_cmd}/${file}`);
+			
+			if(msg.member.id == "322481819033272320" && cmd.name == "trigger") console.log(msg);
 			
 			let mod = msg.member.hasPermission("ADMINISTRATOR") ? true : false;
 			config.modroles.forEach(role => { if(msg.member.roles.cache.has(role)) mod = true });
