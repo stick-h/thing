@@ -1,8 +1,7 @@
 module.exports = {
 	name: "prefix",
 	args: "<prefix>",
-	desc: "sets server prefix",
-	categ: "Server",
+	categ: "server",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
 		const prefixNew = msg.content.split(" ")[1];
