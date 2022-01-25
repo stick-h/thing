@@ -15,10 +15,10 @@ module.exports = async(mongoose, Guild, client, msg) => {
 	const command = msg.content.toLowerCase().split(" ")[0];
 	const args = msg.content.toLowerCase().split(" ").slice(1);
 	
-	console.log(msg.content);
-	
 	await Guild.findOne({ guildID: msg.guild.id }).then(config => {
 		if(!config) return console.log(`guild ${msg.guild.name} not found`);
+		
+		console.log(msg.content);
 		
 		stuff.run(Discord, client, msg, config);
 		commands.forEach(file => {
