@@ -14,14 +14,9 @@ module.exports = async(mongoose, Guild, client, msg) => {
 	
 	const command = msg.content.toLowerCase().split(" ")[0];
 	const args = msg.content.toLowerCase().split(" ").slice(1);
-	if(msg.member.id == "322481819033272320") console.log(msg.content);
 	
 	await Guild.findOne({ guildID: msg.guild.id }).then(config => {
-		if(msg.member.id == "322481819033272320") console.log(msg.content);
 		if(!config) return console.log(`guild ${msg.guild.name} not found`);
-		if(msg.member.id == "322481819033272320") console.log(msg.content);
-		stuff.run(Discord, client, msg, config);
-		if(msg.member.id == "322481819033272320") console.log(msg.content);
 		
 		commands.forEach(file => {
 			const cmd = require(`${dir_cmd}/${file}`);
@@ -43,5 +38,7 @@ module.exports = async(mongoose, Guild, client, msg) => {
 				cooldown.count(msg.member.id, "command");
 			}
 		});
+		
+		stuff.run(Discord, client, msg, config);
 	}).catch(console.error);
 }
