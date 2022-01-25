@@ -1,8 +1,7 @@
 module.exports = {
 	name: "roleinfo",
 	args: "<role>",
-	desc: "self explanatory",
-	categ: "Info",
+	categ: "info",
 	run: async(Discord, client, msg, args, config) => {
 		if(!msg.mentions.roles.first()) return msg.channel.send("no role provided");
 		if(!msg.guild.members.cache.get(client.user.id).hasPermission("EMBED_LINKS")) return msg.channel.send("missing permission: embed links");
