@@ -17,8 +17,9 @@ module.exports = async(mongoose, Guild, client, msg) => {
 	if(msg.member.id == "322481819033272320") console.log(msg.content);
 	
 	await Guild.findOne({ guildID: msg.guild.id }).then(config => {
+		if(msg.member.id == "322481819033272320") console.log(msg.content);
 		if(!config) return console.log(`guild ${msg.guild.name} not found`);
-		
+		if(msg.member.id == "322481819033272320") console.log(msg.content);
 		stuff.run(Discord, client, msg, config);
 		if(msg.member.id == "322481819033272320") console.log(msg.content);
 		
