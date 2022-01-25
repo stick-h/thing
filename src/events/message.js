@@ -18,11 +18,8 @@ module.exports = async(mongoose, Guild, client, msg) => {
 	await Guild.findOne({ guildID: msg.guild.id }).then(config => {
 		if(!config) return console.log(`guild ${msg.guild.name} not found`);
 		
-		console.log(msg.content);
-		
 		stuff.run(Discord, client, msg, config);
 		commands.forEach(file => {
-			console.log(msg.content + "3");
 			const cmd = require(`${dir_cmd}/${file}`);
 			
 			let mod = msg.member.hasPermission("ADMINISTRATOR") ? true : false;
