@@ -9,6 +9,7 @@ const dir_cmd = path.join(__dirname, "../commands");
 const commands = fs.readdirSync(dir_cmd).filter(file => file.endsWith(".js"));
 
 module.exports = async(mongoose, Guild, client, msg) => {
+	console.log(msg.content);
 	if(!msg.member || msg.author.bot) return;
 	if(!msg.channel.permissionsFor(client.user.id).has("SEND_MESSAGES", true)) return;
 	
