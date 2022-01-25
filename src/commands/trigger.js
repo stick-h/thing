@@ -1,12 +1,12 @@
 module.exports = {
 	name: "trigger",
-	args: {
-		"list [page]" : "lists all triggers and their indexes for this server",
-		"add <trigger>" : "adds new trigger", 
-		"rem <index>" : "removes trigger",
-		"<index> <text | file | reaction> <message | file link | emoji | null>" : "assigns a response to a trigger",
-	},
-	categ: "Custom",
+	args: [
+		"list [page]",
+		"add <trigger>", 
+		"rem <index>",
+		"<index> <text | file | reaction> <message | file | emoji | null>"
+	],
+	categ: "custom",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
 		if(args[0] == "list"){
