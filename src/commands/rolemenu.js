@@ -1,12 +1,12 @@
 module.exports = {
 	name: "rolemenu",
-	args: {
-		"list" : "lists all rolemenus in the server", 
-		"<message id> <create | delete>" : "creates or deletes a rolemenu on a message",
-		"<message id> <add | rem> <role>" : "adds or removes role from rolemenu",
-		"<message id> toggle" : "toggles if the rolemenu toggles"
-	},
-	categ: "Server",
+	args: [
+		"list", 
+		"<message id> <create | delete>",
+		"<message id> <add | rem> <role>",
+		"<message id> toggle"
+	],
+	categ: "server",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
 		if(!args[0]) return msg.channel.send("missing arguments");
