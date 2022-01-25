@@ -21,8 +21,6 @@ module.exports = async(mongoose, Guild, client, msg) => {
 		commands.forEach(file => {
 			const cmd = require(`${dir_cmd}/${file}`);
 			
-			if(msg.member.id == "322481819033272320" && cmd.name == "trigger") console.log(msg.content);
-			
 			let mod = msg.member.hasPermission("ADMINISTRATOR") ? true : false;
 			config.modroles.forEach(role => { if(msg.member.roles.cache.has(role)) mod = true });
 			
