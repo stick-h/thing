@@ -23,8 +23,8 @@ module.exports = {
 		collection(client.commands, __dirname);
 		let categs = {};
 		
-		categs["Cats"] = [];
-		for(const cat in cats) if(cats[cat].help) categs["Cats"].push("`" + cat + "`\n");
+		categs["cats"] = [];
+		for(const cat in cats) if(cats[cat].help) categs["cats"].push("`" + cat + "`\n");
 		
 		client.commands.forEach(cmd => {
 			if(categs[cmd.categ] == undefined) categs[cmd.categ] = [];
