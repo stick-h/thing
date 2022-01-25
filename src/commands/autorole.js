@@ -1,8 +1,7 @@
 module.exports = {
 	name: "autorole",
 	args: "[role | reset]",
-	desc: "automatically assigns role to new members",
-	categ: "Server",
+	categ: "server",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
 		if(!args[0]){
