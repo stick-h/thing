@@ -1,10 +1,10 @@
 module.exports = {
 	name: "mod",
-	args: {
-		"list" : "lists all mod roles for this server", 
-		"<add | rem> <role>" : "gives or takes a role's mod perms"
-	},
-	categ: "Server",
+	args: [
+		"list", 
+		"<add | rem> <role>"
+	],
+	categ: "server",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
 		const modroles = config.modroles;
