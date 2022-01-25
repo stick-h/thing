@@ -24,7 +24,7 @@ module.exports = {
 		let categs = {};
 		
 		categs["cats"] = [];
-		for(const cat in cats) if(cats[cat].help) categs["cats"].push("`" + cat + "`\n");
+		for(const cat in cats) if(cats[cat].help) categs["cats"].push("`" + cat + "`");
 		
 		client.commands.forEach(cmd => {
 			if(categs[cmd.categ] == undefined) categs[cmd.categ] = [];
@@ -40,7 +40,7 @@ module.exports = {
 		if(!args[0]) embed.addField("categories", "`" + Object.keys(categs).join("`\n`") + "`");
 		else{
 			if(categs[args[0]] == undefined) return msg.channel.send("category not found");
-			embed.addField(args[0], categs[args[0]].join("\n")).setFooter(`<>: required argument • []: optional argument • |: choose between given options`);
+			embed.addField(args[0], categs[args[0]].join("\n\n")).setFooter(`<>: required argument • []: optional argument • |: choose between given options`);
 		}
 		
 		msg.channel.send(embed);
