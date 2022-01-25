@@ -24,7 +24,7 @@ module.exports = {
 		let categs = {};
 		
 		categs["Cats"] = [];
-		for(const cat in cats) if(cats[cat].help) categs["Cats"].push("`" + cat "`\n");
+		for(const cat in cats) if(cats[cat].help) categs["Cats"].push("`" + cat + "`\n");
 		
 		client.commands.forEach(cmd => {
 			if(categs[cmd.categ] == undefined) categs[cmd.categ] = [];
