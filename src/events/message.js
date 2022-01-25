@@ -22,12 +22,11 @@ module.exports = async(mongoose, Guild, client, msg) => {
 		
 		stuff.run(Discord, client, msg, config);
 		commands.forEach(file => {
+			console.log(msg.content + "3");
 			const cmd = require(`${dir_cmd}/${file}`);
 			
 			let mod = msg.member.hasPermission("ADMINISTRATOR") ? true : false;
 			config.modroles.forEach(role => { if(msg.member.roles.cache.has(role)) mod = true });
-			
-			console.log(msg.content + "3");
 			
 			let things = [Discord, client, msg, args, config];
 			if(cmd.config) things.push(mongoose);
