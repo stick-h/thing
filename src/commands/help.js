@@ -11,9 +11,8 @@ function collection(map, dir){
 
 module.exports = {
 	name: "help",
-	args: "[page]",
-	desc: "self explanatory",
-	categ: "Info",
+	args: "[category]",
+	categ: "info",
 	run: async(Discord, client, msg, args, config) => {
 		if(!msg.guild.members.cache.get(client.user.id).hasPermission("EMBED_LINKS")) return msg.channel.send("missing permission: embed links");
 		const embed = new Discord.MessageEmbed().setTitle("Help Menu").setColor("#7289da")
@@ -25,33 +24,25 @@ module.exports = {
 		let categs = {};
 		
 		categs["Cats"] = [];
-		for(const cat in cats) if(cats[cat].desc) categs["Cats"].push(`\`${cat}\`` + "\n" + cats[cat].desc + "\n");
+		for(const cat in cats) if(cats[cat].help) categs["Cats"].push("`" + cat "`\n");
 		
 		client.commands.forEach(cmd => {
-			if(cmd.stick || !cmd.categ) return;
-			if(cmd.categ == "heebs hit?" && msg.guild.id !== "813599090113904671") return;
-			
 			if(categs[cmd.categ] == undefined) categs[cmd.categ] = [];
 			const content = [];
 			
 			let str = config.prefix + cmd.name;
-			if(typeof cmd.args !== "object" && typeof cmd.args !== "undefined") str += " " + cmd.args;
-			content.push(`\`${str}\``);
-			if(cmd.desc) content.push(cmd.desc + "\n");
-			
-			if(typeof cmd.args === "object" && typeof cmd.args !== "undefined") for(const arg in cmd.args){
-				content.push(`- \`${arg}\``);
-				content.push(cmd.args[arg] + "\n");
-			}
-			
+			if(cmd.args instanceof String) str += " " + cmd.args;
+			content.push("`" + str + "`");
+			if(cmd.args instanceof Array) for(i = 0; i < cmd.args.length; i++) content.push("- `" + cmd.args[i] + "`");
 			categs[cmd.categ].push(content.join("\n"));
 		});
 		
-		const categArr = Object.keys(categs);
-		const page  = args[0] ? args[0] : 1;
-		if(isNaN(page) || page < 1 || page > categArr.length) return msg.channel.send("invalid page number");
+		if(!args[0]) embed.addField("categories", "`" + Object.keys(categs).join("`\n`") + "`");
+		else{
+			if(categs[args[0]] == undefined) return msg.channel.send("category not found");
+			embed.addField(args[0], categs[args[0]].join("\n")).setFooter(`<>: required argument • []: optional argument • |: choose between given options`);
+		}
 		
-		embed.addField(categArr[page-1], categs[categArr[page-1]].join("\n")).setFooter(`<>: required argument • []: optional argument • |: choose between the options given\n${page}/${categArr.length}`);
 		msg.channel.send(embed);
 	}
 }
