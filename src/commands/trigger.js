@@ -56,10 +56,9 @@ module.exports = {
 				await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
 				break;
 			case "file":
-				console.log(msg);
-	//			let file = null;
-	//			if(msg.attatchments) file = msg.attachments.first();
-	//			await config.updateOne({$set: {"triggers.$[obj].file": file}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+				let file = null;
+				if(msg.attatchments.size != 0) file = msg.attachments.first();
+				await config.updateOne({$set: {"triggers.$[obj].file": file}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
 				break;
 			case "reaction":
 				if(args[2] == "" || args[2] == "null") args[2] = null;
