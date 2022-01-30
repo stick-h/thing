@@ -19,7 +19,7 @@ module.exports = {
 				
 				for(i = (page-1)*5; i < config.triggers.length && i < page*5; i++){
 					const trigger = config.triggers[i];
-					const url = trigger.file.url ? trigger.file.url : null;
+					const url = trigger.file ? trigger.file.url : null;
 					embed.addField(`${i} - ${trigger.name}`, `\`text\` - ${trigger.text}\n\`file\` - ${url}\n\`reaction\` - ${trigger.reaction}`);
 				}
 			}
