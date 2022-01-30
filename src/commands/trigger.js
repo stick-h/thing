@@ -19,7 +19,7 @@ module.exports = {
 				
 				for(i = (page-1)*5; i < config.triggers.length && i < page*5; i++){
 					const trigger = config.triggers[i];
-					embed.addField(`${i} - ${trigger.name}`, `\`text\` - ${trigger.text}\n\`file\` - ${trigger.file}\n\`reaction\` - ${trigger.reaction}`);
+					embed.addField(`${i} - ${trigger.name}`, `\`text\` - ${trigger.text}\n\`file\` - ${trigger.file.attachment}\n\`reaction\` - ${trigger.reaction}`);
 				}
 			}
 			return msg.channel.send(embed);
