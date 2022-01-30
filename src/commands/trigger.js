@@ -54,18 +54,22 @@ module.exports = {
 				let response = msg.content.split(" ").slice(3).join(" ");
 				if(response == "" || response == "null") response = null;
 				await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+				msg.channel.send("trigger updated");
 				break;
 			case "file":
 				let file = (msg.attachments.size != 0) ? msg.attachments.first() : null;
 				await config.updateOne({$set: {"triggers.$[obj].file": file}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+				msg.channel.send("trigger updated");
 				break;
 			case "reaction":
-				if(args[2] == "" || args[2] == "null") args[2] = null;
-				else msg.react(args[2]).catch(e => {msg.channel.send("invalid reaction"); args[2] == config.triggers[args[0]].reaction;});
-				await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); 
+				if(!args[2] || args[2] == "null"){
+					await config.updateOne({$set: {"triggers.$[obj].reaction": null}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+					msg.channel.send("trigger updated");
+				}else msg.react(args[2]).then(async reaction => {
+					await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+					msg.channel.send("trigger updated");
+				}).catch(e => msg.channel.send("invalid emoji"));
 				break;
 		}
-		
-		return msg.channel.send("trigger updated");
 	}
 }
