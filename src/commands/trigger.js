@@ -61,7 +61,7 @@ module.exports = {
 				break;
 			case "reaction":
 				if(args[2] == "" || args[2] == "null") args[2] = null;
-				else msg.react(args[2]).catch(e => msg.channel.send("invalid reaction"); args[2] == config.triggers[args[0]].reaction);
+				else msg.react(args[2]).catch(e => msg.channel.send("invalid reaction"); args[2] == config.triggers[args[0]].reaction;);
 				await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); 
 				break;
 		}
