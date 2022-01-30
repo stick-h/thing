@@ -19,7 +19,8 @@ module.exports = {
 				
 				for(i = (page-1)*5; i < config.triggers.length && i < page*5; i++){
 					const trigger = config.triggers[i];
-					embed.addField(`${i} - ${trigger.name}`, `\`text\` - ${trigger.text}\n\`file\` - ${trigger.file.attachment}\n\`reaction\` - ${trigger.reaction}`);
+					const url = trigger.file.url ? trigger.file.url : null;
+					embed.addField(`${i} - ${trigger.name}`, `\`text\` - ${trigger.text}\n\`file\` - ${url}\n\`reaction\` - ${trigger.reaction}`);
 				}
 			}
 			return msg.channel.send(embed);
@@ -47,19 +48,22 @@ module.exports = {
 		
 		if(isNaN(args[0]) || !config.triggers[args[0]]) return msg.channel.send("invalid index");
 		if(args[1] != "text" && args[1] != "file" && args[1] != "reaction") return msg.channel.send("invalid arguments");
-		
-		let response = msg.content.split(" ").slice(3).join(" ");
-		if(args[2] == "null") response = null;
-		let file;
-		if(args[1] == "file"){
-			if(msg.attachments.size == 0) file = null;
-			else file = msg.attachments.first();
-		}
-		
+
 		switch(args[1]){
-			case "text": await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
-			case "file": await config.updateOne({$set: {"triggers.$[obj].file": file}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
-			case "reaction": await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); break;
+			case "text":
+				let response = msg.content.split(" ").slice(3).join(" ");
+				if(response == "" || response == "null") response = null;
+				await config.updateOne({$set: {"triggers.$[obj].text": response}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+				break;
+			case "file":
+				let file = (msg.attachments.size != 0) ? msg.attatchments.first() : null;
+				await config.updateOne({$set: {"triggers.$[obj].file": file}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
+				break;
+			case "reaction":
+				if(args[2] == "" || args[2] == "null") args[2] = null;
+				else msg.react(args[2]).catch(e => msg.channel.send("invalid reaction"); args[2] == config.triggers[args[0]].reaction);
+				await config.updateOne({$set: {"triggers.$[obj].reaction": args[2]}}, {arrayFilters: [{obj: config.triggers[args[0]]}]}); 
+				break;
 		}
 		
 		return msg.channel.send("trigger updated");
