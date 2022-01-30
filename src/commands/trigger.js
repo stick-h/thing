@@ -57,7 +57,7 @@ module.exports = {
 				break;
 			case "file":
 				let file = null;
-				if(msg.attatchments.size != 0) file = msg.attachments.first();
+				if(msg.attatchments) file = msg.attachments.first();
 				await config.updateOne({$set: {"triggers.$[obj].file": file}}, {arrayFilters: [{obj: config.triggers[args[0]]}]});
 				break;
 			case "reaction":
