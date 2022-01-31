@@ -29,7 +29,7 @@ module.exports = {
 		}
 		
 		msg.content = msg.content.toLowerCase();
-		let msgA = msg.content.split(/\W|_/g).join(" ");
+		let msgA = msg.content.split(/\W|_/g);
 		
 		for(const cat in cats) detect(cat, cats[cat]);
 		if(config.triggers) config.triggers.forEach(obj => detect(obj.name, obj));
