@@ -1,6 +1,6 @@
 {
-  "main": "src/thing.js"
-  "scripts": {"start": "node src/thing.js"}
+  "main": "src/thing.js",
+  "scripts": {"start": "node src/thing.js"},
   "dependencies": {
     "discord.js": "^12.5.3",
     "mongoose": "^5.12.3"
