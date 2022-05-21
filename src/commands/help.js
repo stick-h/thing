@@ -15,9 +15,7 @@ module.exports = {
 	categ: "info",
 	run: async(Discord, client, msg, args, config) => {
 		if(!msg.guild.members.cache.get(client.user.id).hasPermission("EMBED_LINKS")) return msg.channel.send("missing permission: embed links");
-		const embed = new Discord.MessageEmbed().setTitle("Help Menu").setColor("#7289da")
-			.setThumbnail(client.user.avatarURL())
-			.setAuthor("Cats drawn by @misunet", "https://i.redd.it/sywglt58ngg01.jpg", "https://www.instagram.com/misunet/");
+		const embed = new Discord.MessageEmbed().setTitle("Help Menu").setColor("#7289da").setThumbnail(client.user.avatarURL());
 		
 		client.commands = new Discord.Collection();
 		collection(client.commands, __dirname);
