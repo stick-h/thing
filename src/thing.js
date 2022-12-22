@@ -34,4 +34,4 @@ files.forEach(file => {
 });
 
 client.mongoose.init();
-client.login(process.env.token);
+client.login(process.env.TOKEN);
