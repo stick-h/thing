@@ -1,5 +1,4 @@
 const fs = require("fs");
-const cats = require("../util/cats.json");
 
 function collection(map, dir){
 	const files = fs.readdirSync(dir).filter(file => file.endsWith(".js"));
@@ -20,9 +19,6 @@ module.exports = {
 		client.commands = new Discord.Collection();
 		collection(client.commands, __dirname);
 		let categs = {};
-		
-		categs["cats"] = [];
-		for(const cat in cats) if(cats[cat].help) categs["cats"].push("`" + cat + "`");
 		
 		client.commands.forEach(cmd => {
 			if(categs[cmd.categ] == undefined) categs[cmd.categ] = [];

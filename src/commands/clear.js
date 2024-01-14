@@ -2,10 +2,8 @@ module.exports = {
 	name: "clear",
 	args: "<num> [user]",
 	categ: "mod",
-	mod: true,
-	run: async(Discord, client, msg, args, config, mod) => {
+	run: async(Discord, client, msg, args, config) => {
 		if(isNaN(args[0])) return msg.channel.send("invalid arguments");
-		if(!mod) return msg.channel.send("mod role required to use this command");
 		
 		const self = msg.guild.members.cache.get(client.user.id);
 		if(!msg.channel.permissionsFor(self).has("MANAGE_MESSAGES")) return msg.channel.send("missing permission: manage messages");

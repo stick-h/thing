@@ -4,10 +4,7 @@ module.exports = async(mongoose, Guild, client, guild) => {
 		guildID: guild.id,
 		guildName: guild.name,
 		prefix: "~",
-		autorole: null,
 		modroles: [],
-		rolemenus: [],
-		triggers: [],
-		commands: []
+		triggers: []
 	}).save().then(save => console.log(`guild ${save.guildName} added`)).catch(console.error);
 }

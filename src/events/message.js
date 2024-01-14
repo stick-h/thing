@@ -18,25 +18,23 @@ module.exports = async(mongoose, Guild, client, msg) => {
 	await Guild.findOne({ guildID: msg.guild.id }).then(config => {
 		if(!config) return console.log(`guild ${msg.guild.name} not found`);
 		
+		stuff.run(Discord, client, msg, config);
 		commands.forEach(file => {
 			const cmd = require(`${dir_cmd}/${file}`);
 			
-			let mod = msg.member.hasPermission("ADMINISTRATOR") ? true : false;
+			let mod = msg.member.permissions.has("ADMINISTRATOR") ? true : false;
 			config.modroles.forEach(role => { if(msg.member.roles.cache.has(role)) mod = true });
 			
 			let things = [Discord, client, msg, args, config];
 			if(cmd.config) things.push(mongoose);
-			if(cmd.mod) things.push(mod);
 		
 			if(command == config.prefix + cmd.name){
-				if(cmd.stick && msg.member.id != "322481819033272320") return;
 				if(cooldown.bool(msg.member.id, "command")) return;
+				if(cmd.categ == "mod" && !mod) return msg.channel.send("mod role required to use this command");
 				
 				cmd.run(...things);
 				cooldown.count(msg.member.id, "command");
 			}
 		});
-		
-		stuff.run(Discord, client, msg, config);
 	}).catch(console.error);
 }

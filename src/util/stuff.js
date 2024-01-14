@@ -1,4 +1,3 @@
-const cats = require("./cats.json");
 const cooldown = require("../util/cooldown.js");
 const fs = require("fs");
 const gnns = fs.readdirSync(`${__dirname}/gnn`).filter(file => file.endsWith(".jpg"));
@@ -39,8 +38,6 @@ module.exports = {
 		
 		let msgA = msg.content.split(/\W|_/g);
 		for(i = 0; i < msgA.length; i++) if(msgA[i] == ""){msgA.splice(i,1); i--;}
-		
-		for(const cat in cats) detect(cat, cats[cat]);
 		if(config.triggers) config.triggers.forEach(obj => detect(obj.name, obj));
 		
 		detect("gnn", `${__dirname}/gnn/${gnns[Math.floor(Math.random()*gnns.length)]}`);
