@@ -7,7 +7,7 @@ module.exports = {
 	run: async(Discord, client, msg, config) => {
 		function detect(str){
 			let found;
-
+			
 			if(str == str.replace(/\W|_/g, " ")){
 				str = " " + str + " ";
 				found = (msg0.indexOf(str) != -1) ? true : false;
@@ -32,6 +32,6 @@ module.exports = {
 		
 		if(detect("gnn")) msg.channel.send({files: [`${__dirname}/gnn/${gnns[Math.floor(Math.random()*gnns.length)]}`]})
 		
-		if(msg.content.includes("thank") && detect("thing") || msg.mentions.users.find(user => user.id == client.user.id))) msg.react("💜");
+		if(msg.content.includes("thank") && detect("thing") || msg.mentions.users.find(user => user.id == client.user.id)) msg.react("💜");
 	}
 }
