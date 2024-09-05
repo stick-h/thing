@@ -7,8 +7,7 @@ module.exports = {
 	run: async(Discord, client, msg, config) => {
 		function detect(str){
 			let found;
-			str = " " + str + " ";
-			
+
 			if(str == str.replace(/\W|_/g, " ")){
 				str = " " + str + " ";
 				found = (msg0.indexOf(str) != -1) ? true : false;
