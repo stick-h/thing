@@ -6,7 +6,7 @@ module.exports = {
 		"rem <index>",
 		"<index> <text | file | reaction> <message | file | emoji | null>"
 	],
-	categ: "custom",
+	categ: "server",
 	config: true,
 	run: async(Discord, client, msg, args, config, mongoose) => {
 		if(args[0] == "list"){

@@ -11,7 +11,7 @@ function collection(map, dir){
 module.exports = {
 	name: "help",
 	args: "[category]",
-	categ: "info",
+	categ: "util",
 	run: async(Discord, client, msg, args, config) => {
 		if(!msg.guild.members.cache.get(client.user.id).hasPermission("EMBED_LINKS")) return msg.channel.send("missing permission: embed links");
 		const embed = new Discord.MessageEmbed().setTitle("Help Menu").setColor("#7289da").setThumbnail(client.user.avatarURL());
