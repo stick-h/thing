@@ -18,8 +18,7 @@ module.exports = {
 		}
 		
 		if(cooldown.bool(msg.member.id, "stuff")) return;
-		msg.content = msg.content.toLowerCase();
-		let msg0 = msg.content.replace(/\W|_/g, " ");
+		let msg0 = msg.content.toLowerCase().replace(/\W|_/g, " ");
 		msg0 = " " + msg0.replace(/( ){1,}/g, " ") + " ";
 		
 		if(config.triggers) config.triggers.forEach(obj => {
