@@ -31,6 +31,6 @@ module.exports = {
 		
 		if(detect("gnn")) msg.channel.send({files: [`${__dirname}/gnn/${gnns[Math.floor(Math.random()*gnns.length)]}`]})
 		
-		if(msg.content.includes("thank") && detect("thing") || msg.mentions.users.find(user => user.id == client.user.id)) msg.react("💜");
+		if(msg0.includes("thank") && detect("thing") || msg.mentions.users.find(user => user.id == client.user.id)) msg.react("💜");
 	}
 }
